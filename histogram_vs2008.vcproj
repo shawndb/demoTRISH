@@ -24,7 +24,7 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="$(ConfigurationName)"
+			OutputDirectory="../../bin/win32/$(Configuration)/"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="1"
 			CharacterSet="2"
@@ -37,6 +37,13 @@
 			/>
 			<Tool
 				Name="Cudart Build Rule"
+				NvccPath="$(CUDA_PATH_V4_0)bin\nvcc.exe"
+				RequiredIncludes="$(CUDA_PATH_V4_0)include"
+				Include="./;../../common/inc;../../../shared/inc"
+				GPUDebugInfo="true"
+				Arch1="20"
+				Arch2="0"
+				PtxAsOptionV="true"
 			/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"
@@ -50,7 +57,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="$(CUDA_PATH)/include;./;../../common/inc;../../../shared/inc"
+				AdditionalIncludeDirectories="./;../../common/inc;../../../shared/inc;$(CUDA_PATH_V4_0)include;%(AdditionalIncludeDirectories);"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -74,7 +81,7 @@
 				AdditionalDependencies="cudart.lib cutil32D.lib shrUtils32D.lib"
 				OutputFile="../../bin/win32/$(ConfigurationName)/histogram.exe"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="$(CUDA_PATH)/lib/$(PlatformName);../../common/lib;../../common/lib/$(PlatformName);../../../shared/lib/$(PlatformName)"
+				AdditionalLibraryDirectories=";../../common/lib/$(PlatformName);../../../shared/lib/$(PlatformName);%(AdditionalLibraryDirectories);$(CUDA_PATH_V4_0)lib\$(PlatformName)"
 				GenerateDebugInformation="true"
 				ProgramDatabaseFile="$(OutDir)/histogram.pdb"
 				SubSystem="1"
@@ -108,7 +115,7 @@
 		</Configuration>
 		<Configuration
 			Name="Debug|x64"
-			OutputDirectory="$(PlatformName)\$(ConfigurationName)"
+			OutputDirectory="../../bin/win64/$(Configuration)/"
 			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
 			ConfigurationType="1"
 			CharacterSet="2"
@@ -121,7 +128,14 @@
 			/>
 			<Tool
 				Name="Cudart Build Rule"
+				NvccPath="$(CUDA_PATH_V4_0)bin\nvcc.exe"
+				RequiredIncludes="$(CUDA_PATH_V4_0)include"
+				Include="./;../../common/inc;../../../shared/inc"
+				GPUDebugInfo="true"
+				Arch1="0"
+				Arch2="20"
 				TargetMachinePlatform="1"
+				PtxAsOptionV="true"
 			/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"
@@ -136,7 +150,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="$(CUDA_PATH)/include;./;../../common/inc;../../../shared/inc"
+				AdditionalIncludeDirectories="./;../../common/inc;../../../shared/inc;$(CUDA_PATH_V4_0)include;%(AdditionalIncludeDirectories);"
 				PreprocessorDefinitions="WIN64;_DEBUG;_CONSOLE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -160,7 +174,7 @@
 				AdditionalDependencies="cudart.lib cutil64D.lib shrUtils64D.lib"
 				OutputFile="../../bin/win64/$(ConfigurationName)/histogram.exe"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="$(CUDA_PATH)/lib/$(PlatformName);../../common/lib;../../common/lib/$(PlatformName);../../../shared/lib/$(PlatformName)"
+				AdditionalLibraryDirectories=";../../common/lib/$(PlatformName);../../../shared/lib/$(PlatformName);%(AdditionalLibraryDirectories);$(CUDA_PATH_V4_0)lib\$(PlatformName)"
 				GenerateDebugInformation="true"
 				ProgramDatabaseFile="$(OutDir)/histogram.pdb"
 				SubSystem="1"
@@ -194,7 +208,7 @@
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="$(ConfigurationName)"
+			OutputDirectory="../../bin/win32/$(Configuration)/"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="1"
 			CharacterSet="2"
@@ -207,6 +221,12 @@
 			/>
 			<Tool
 				Name="Cudart Build Rule"
+				NvccPath="$(CUDA_PATH_V4_0)bin\nvcc.exe"
+				RequiredIncludes="$(CUDA_PATH_V4_0)include"
+				Include="./;../../common/inc;../../../shared/inc"
+				Arch1="20"
+				Arch2="0"
+				PtxAsOptionV="true"
 				Runtime="0"
 			/>
 			<Tool
@@ -220,7 +240,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="$(CUDA_PATH)/include;./;../../common/inc;../../../shared/inc"
+				AdditionalIncludeDirectories="./;../../common/inc;../../../shared/inc;$(CUDA_PATH_V4_0)include;%(AdditionalIncludeDirectories);"
 				PreprocessorDefinitions="WIN32;_CONSOLE"
 				RuntimeLibrary="0"
 				UsePrecompiledHeader="0"
@@ -242,7 +262,7 @@
 				AdditionalDependencies="cudart.lib cutil32.lib shrUtils32.lib"
 				OutputFile="../../bin/win32/$(ConfigurationName)/histogram.exe"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="$(CUDA_PATH)/lib/$(PlatformName);../../common/lib;../../common/lib/$(PlatformName);../../../shared/lib/$(PlatformName)"
+				AdditionalLibraryDirectories=";../../common/lib/$(PlatformName);../../../shared/lib/$(PlatformName);%(AdditionalLibraryDirectories);$(CUDA_PATH_V4_0)lib\$(PlatformName)"
 				GenerateDebugInformation="false"
 				SubSystem="1"
 				OptimizeReferences="2"
@@ -276,7 +296,7 @@
 		</Configuration>
 		<Configuration
 			Name="Release|x64"
-			OutputDirectory="$(PlatformName)\$(ConfigurationName)"
+			OutputDirectory="../../bin/win64/$(Configuration)/"
 			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
 			ConfigurationType="1"
 			CharacterSet="2"
@@ -289,7 +309,13 @@
 			/>
 			<Tool
 				Name="Cudart Build Rule"
+				NvccPath="$(CUDA_PATH_V4_0)bin\nvcc.exe"
+				RequiredIncludes="$(CUDA_PATH_V4_0)include"
+				Include="./;../../common/inc;../../../shared/inc"
+				Arch1="20"
+				Arch2="0"
 				TargetMachinePlatform="1"
+				PtxAsOptionV="true"
 				Runtime="0"
 			/>
 			<Tool
@@ -304,7 +330,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="$(CUDA_PATH)/include;./;../../common/inc;../../../shared/inc"
+				AdditionalIncludeDirectories="./;../../common/inc;../../../shared/inc;$(CUDA_PATH_V4_0)include;%(AdditionalIncludeDirectories);"
 				PreprocessorDefinitions="WIN64;_CONSOLE"
 				RuntimeLibrary="0"
 				UsePrecompiledHeader="0"
@@ -326,7 +352,7 @@
 				AdditionalDependencies="cudart.lib cutil64.lib shrUtils64.lib"
 				OutputFile="../../bin/win64/$(ConfigurationName)/histogram.exe"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="$(CUDA_PATH)/lib/$(PlatformName);../../common/lib;../../common/lib/$(PlatformName);../../../shared/lib/$(PlatformName)"
+				AdditionalLibraryDirectories=";../../common/lib/$(PlatformName);../../../shared/lib/$(PlatformName);%(AdditionalLibraryDirectories);$(CUDA_PATH_V4_0)lib\$(PlatformName)"
 				GenerateDebugInformation="false"
 				SubSystem="1"
 				OptimizeReferences="2"
@@ -525,6 +551,10 @@
 			</File>
 			<File
 				RelativePath=".\histogram_gold.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\histogramTRISH.cu"
 				>
 			</File>
 			<File
