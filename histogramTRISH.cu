@@ -27,57 +27,6 @@
 
 
 /*-----------------------------------------------------------------------------
-  Compiler Settings
------------------------------------------------------------------------------*/
-
-//#define INTERLEAVE 1
-//#define INTERLEAVE 2
-#define INTERLEAVE 4
-
-//#define HIST_VERIFY_ROW_COUNTS 1
-#define HIST_VERIFY_ROW_COUNTS 0
-
-//#define HIST_VERIFY_ROW_STARTS 1
-#define HIST_VERIFY_ROW_STARTS 0
-
-
-/*-----------------------------------------------------------------------------
-  Function Declarations
------------------------------------------------------------------------------*/
-
-__host__
-void H_VerifyRowCounts_TRISH
-( 
-	 uint   nElems, 
-	 uint   nRows,
-	 uint * h_rowCounts, 
-	 uint * h_values
-);
-
-__host__
-void H_VerifyStarts_TRISH
-( 
-	      uint   nRows,
-         uint   ChunkSize,
-	const uint * gpuRowCounts,
-	const uint * gpuRowStarts,
-	const uint * gpuTotalStarts, 
-	      uint   nElements, 
-	const uint * valuesCPU,
-	const uint * valsCPU
-);
-
-
-__host__
-void H_VerifyHistogram_TRISH
-( 
-	 uint   nElems, 
-	 uint * h_gpuCounts,
-	 uint * h_cpuValues
-);
-
-
-/*-----------------------------------------------------------------------------
   Helper Templates
 -----------------------------------------------------------------------------*/
 
@@ -787,7 +736,7 @@ void H_K1_CountRows_256_TRISH
 	const uint leftOverThrd = sizeTCounts - (nPassesThrd * BlockSize);
 
 	const uint nThreadsPerGrid = BlockSize * GridSize;	//   3,072 = 64 * 48
-    const uint rowSize = K_length * nThreadsPerGrid;		// 193,586 = 63 * 64 * 48
+   const uint rowSize = K_length * nThreadsPerGrid;		// 193,586 = 63 * 64 * 48
 
 
 	//------------------------------------
@@ -2108,10 +2057,10 @@ void H_K2_RowCounts_To_RowStarts_256
 //#define NUM_GPU_SMs (14u)
 
 // GTX 480
-//#define NUM_GPU_SMs (15u)
+#define NUM_GPU_SMs (15u)
 
 // GTX 580
-#define NUM_GPU_SMs (16u)
+//#define NUM_GPU_SMs (16u)
 
 
 // Intermediate CUDA buffers
@@ -2184,15 +2133,15 @@ void histogramTrish256
 	//-----
 
 
-		// Note:  The best # of blocks for the TRISH algorithm appears to be
-	    //        The # of SM's on the card * the number of concurrent blocks.
-	    //        This is the mininum to effectively use all hardware resources effectively.
-		// 
-	    // For Example:  On the following Fermi cards, the grid sizes for best performance would be ... 
-		//  GTX 560M    = 12 =  4 * 3
-	    //  TELSA M2050 = 42 = 14 * 3
-		//  GTX 480     = 45 = 15 * 3
-		//  GTX 580     = 48 = 16 * 3
+      // Note:  The best # of blocks for the TRISH algorithm appears to be
+      //        The # of SM's on the card * the number of concurrent blocks.
+      //        This is the mininum to effectively use all hardware resources effectively.
+      // 
+      // For Example:  On the following Fermi cards, the grid sizes for best performance would be ... 
+      //  GTX 560M    = 12 =  4 * 3
+      //  TELSA M2050 = 42 = 14 * 3
+      //  GTX 480     = 45 = 15 * 3
+      //  GTX 580     = 48 = 16 * 3
 
 	const uint nGPU_SMs     = NUM_GPU_SMs;	// See #defines above
 	const uint nGPU_ConcurrentBlocks = 3u;	// for Fermi architectures, we can achieve 3 concurrent blocks per SM (64 * 3 = 192 => 192/1536 => 12.5% occupancy 
